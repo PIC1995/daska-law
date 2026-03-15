@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daska.law — Ton capital, ta trajectoire</title>
+<!-- SEO -->
+<meta name="description" content="Daska.law — Diagnostique ton capital en 5 minutes. Optimise ta structure juridique, prépare ta levée de fonds, sécurise tes associés. Gratuit.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="ALPHA LEGAL">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://daska.law/">
+<meta property="og:title" content="Daska.law — Ton capital, ta trajectoire">
+<meta property="og:description" content="Diagnostique ton capital en 5 minutes. Structure juridique, levée de fonds, conflits associés, holding, cession. Gratuit et sans inscription.">
+<meta property="og:image" content="https://daska.law/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Daska.law">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daska.law — Ton capital, ta trajectoire">
+<meta name="twitter:description" content="Diagnostique ton capital en 5 minutes. Gratuit et sans inscription.">
+<meta name="twitter:image" content="https://daska.law/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -745,9 +764,48 @@ footer {
 /* ════════════════════════════════
    SCROLL REVEAL OBSERVER
 ════════════════════════════════ */
+
+/* ── Cookie Banner ── */
+#cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  background: #13161f; border-top: 1px solid rgba(255,255,255,.08);
+  padding: 16px 24px; display: flex; align-items: center;
+  gap: 16px; flex-wrap: wrap; justify-content: space-between;
+  box-shadow: 0 -8px 32px rgba(0,0,0,.3);
+  transform: translateY(100%); transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+#cookie-banner.show { transform: translateY(0); }
+#cookie-banner p { font-size: .82rem; color: rgba(255,255,255,.65); margin: 0; flex: 1; min-width: 200px; line-height: 1.5; }
+#cookie-banner a { color: #c8e030; text-decoration: none; }
+#cookie-banner a:hover { text-decoration: underline; }
+.cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+.btn-cookie-accept {
+  background: linear-gradient(135deg, #c8e030, #e87f24);
+  color: #0b0d12; border: none; border-radius: 100px;
+  padding: 9px 20px; font-size: .82rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+}
+.btn-cookie-refuse {
+  background: transparent; color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.15); border-radius: 100px;
+  padding: 9px 20px; font-size: .82rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+.btn-cookie-refuse:hover { color: rgba(255,255,255,.8); }
 </style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.svg">
 </head>
 <body>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" role="dialog" aria-label="Consentement cookies">
+  <p>Nous utilisons des cookies pour analyser le trafic et améliorer votre expérience. En continuant, vous acceptez notre <a href="confidentialite.html">politique de confidentialité</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn-cookie-refuse" onclick="cookieChoice(false)">Refuser</button>
+    <button class="btn-cookie-accept" onclick="cookieChoice(true)">Accepter</button>
+  </div>
+</div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav" id="nav">
@@ -1367,6 +1425,19 @@ function showScore(score, diag, email) {
         Voir mon tableau de bord →
       </button>
     </div>`;
+}
+
+// Cookie banner
+(function() {
+  if (!localStorage.getItem('cookie_consent')) {
+    setTimeout(() => document.getElementById('cookie-banner').classList.add('show'), 800);
+  }
+})();
+function cookieChoice(accepted) {
+  localStorage.setItem('cookie_consent', accepted ? 'accepted' : 'refused');
+  const b = document.getElementById('cookie-banner');
+  b.style.transform = 'translateY(100%)';
+  setTimeout(() => b.remove(), 400);
 }
 
 </script>

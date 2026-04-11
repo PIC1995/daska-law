@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daska.law — Sparring Partner</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e2a;
+    --border: #252a38;
+    --accent: #3ecf8e;
+    --accent2: #f97316;
+    --accent3: #6366f1;
+    --warn: #ef4444;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo {
+    height: 32px;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .badge {
+    background: var(--accent3);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .header-date {
+    color: var(--text3);
+    font-size: 12px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 28px;
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 8px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--text2);
+    font-weight: 500;
+    font-size: 13px;
+    border: none;
+    background: transparent;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    background: var(--surface2);
+    color: var(--text);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text3);
+    margin-bottom: 16px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  /* KPI CARDS */
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .kpi-label { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .kpi-value { font-size: 28px; font-weight: 700; color: var(--text); line-height: 1; }
+  .kpi-sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+  .kpi-warn::before { background: var(--warn); }
+  .kpi-ok::before { background: var(--accent); }
+  .kpi-neutral::before { background: var(--accent3); }
+
+  /* STATUS PILLS */
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .pill-red { background: rgba(239,68,68,0.15); color: #f87171; }
+  .pill-green { background: rgba(62,207,142,0.15); color: #34d399; }
+  .pill-orange { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .pill-blue { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .pill-gray { background: rgba(100,116,139,0.15); color: #94a3b8; }
+
+  /* SECTIONS */
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-sub {
+    color: var(--text3);
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  /* BLOCKER ROWS */
+  .blocker-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .blocker-row:last-child { border-bottom: none; }
+
+  .blocker-num {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: var(--accent2);
+  }
+
+  .blocker-content { flex: 1; }
+  .blocker-title { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+  .blocker-desc { color: var(--text2); font-size: 12px; }
+
+  /* SPARRING QUESTIONS */
+  .question-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .question-why {
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+
+  .answer-area {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    resize: vertical;
+    min-height: 70px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+
+  .answer-area:focus {
+    outline: none;
+    border-color: var(--accent3);
+  }
+
+  /* COMMIT TRACKER */
+  .commit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .commit-item:last-child { border-bottom: none; }
+
+  .commit-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .commit-checkbox.done {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .commit-checkbox.done::after { content: '✓'; color: #0d0f14; font-size: 11px; font-weight: 700; }
+
+  .commit-text { flex: 1; font-size: 13px; }
+  .commit-text.done { text-decoration: line-through; color: var(--text3); }
+  .commit-deadline { font-size: 11px; color: var(--text3); flex-shrink: 0; }
+
+  /* EXIT ROADMAP */
+  .milestone {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    position: relative;
+  }
+
+  .milestone::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 48px;
+    bottom: -16px;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .milestone:last-child::after { display: none; }
+
+  .milestone-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+    background: var(--surface2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .milestone-dot.active {
+    border-color: var(--accent);
+    background: rgba(62,207,142,0.1);
+  }
+
+  .milestone-dot.future { opacity: 0.4; }
+
+  .milestone-body { flex: 1; padding-top: 8px; }
+  .milestone-phase { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-bottom: 4px; }
+  .milestone-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .milestone-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .milestone-kpi { font-size: 11px; color: var(--accent); margin-top: 6px; font-weight: 500; }
+
+  /* PIPELINE */
+  .pipeline-stage {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .pipeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .pipeline-name { font-weight: 600; font-size: 13px; }
+  .pipeline-count { font-size: 12px; color: var(--text3); }
+
+  .pipeline-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: var(--bg);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .pipeline-contact:last-child { margin-bottom: 0; }
+  .contact-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .contact-name { flex: 1; color: var(--text); }
+  .contact-offer { color: var(--text3); font-size: 11px; }
+  .contact-action { color: var(--accent2); font-size: 11px; }
+
+  .add-contact-btn {
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    color: var(--text3);
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    transition: all 0.15s;
+  }
+
+  .add-contact-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+
+  /* ACTION ITEMS */
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .action-item:last-child { border-bottom: none; }
+
+  .action-priority {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .prio-1 { background: rgba(239,68,68,0.2); color: #f87171; }
+  .prio-2 { background: rgba(249,115,22,0.2); color: #fb923c; }
+  .prio-3 { background: rgba(99,102,241,0.2); color: #818cf8; }
+
+  .action-body { flex: 1; }
+  .action-title { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+  .action-desc { font-size: 12px; color: var(--text2); }
+  .action-effort { font-size: 11px; color: var(--text3); margin-top: 3px; }
+
+  /* SCORE BAR */
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .score-label { font-size: 12px; color: var(--text2); width: 160px; flex-shrink: 0; }
+  .score-bar { flex: 1; background: var(--bg); border-radius: 4px; height: 6px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .score-num { font-size: 12px; color: var(--text); width: 30px; text-align: right; font-weight: 600; }
+
+  /* PUSH MESSAGE */
+  .push-box {
+    background: linear-gradient(135deg, rgba(62,207,142,0.08), rgba(99,102,241,0.08));
+    border: 1px solid rgba(62,207,142,0.2);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+
+  .push-icon { font-size: 20px; margin-bottom: 6px; }
+  .push-text { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .push-text strong { color: var(--accent); }
+
+  /* INPUT FIELDS */
+  .input-field {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    padding: 9px 12px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+
+  .input-field:focus { outline: none; border-color: var(--accent3); }
+
+  .input-label { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 5px; margin-top: 12px; }
+
+  .btn {
+    padding: 9px 18px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0d0f14;
+  }
+
+  .btn-primary:hover { background: #34d399; }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .tag {
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--surface2);
+    color: var(--text2);
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .container { padding: 20px 16px; }
+    .header { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <img class="logo" src="logo-daska.svg" alt="Daska.law">
+    <span class="badge">Sparring Partner</span>
+  </div>
+  <span class="header-date" id="currentDate">Mis à jour le —</span>
+</div>
+
+<div class="container">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('mission')">🎯 Mission Control</button>
+    <button class="tab" onclick="switchTab('pipeline')">💼 Pipeline Clients</button>
+    <button class="tab" onclick="switchTab('sparring')">🥊 Questions Difficiles</button>
+    <button class="tab" onclick="switchTab('actions')">⚡ Plan d'Action</button>
+    <button class="tab" onclick="switchTab('exit')">🚀 Exit Roadmap</button>
+    <button class="tab" onclick="switchTab('session')">📓 Journal de Session</button>
+  </div>
+
+  <!-- PANEL: MISSION CONTROL -->
+  <div id="panel-mission" class="panel active">
+
+    <div class="push-box">
+      <div class="push-icon">⚡</div>
+      <div class="push-text">
+        <strong>Où tu en es vraiment :</strong> Le site est fonctionnel, les diagnostics tournent, les pages légales existent. Tu n'as plus d'excuse technique. La seule question qui compte maintenant : <strong>quand signe le premier client payant ?</strong> Tout le reste est du bruit.
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom: 16px;">
+      <div class="kpi kpi-warn">
+        <div class="kpi-label">CA Généré</div>
+        <div class="kpi-value" id="kpi-revenue">0 €</div>
+        <div class="kpi-sub">Objectif : 1er mandat signé</div>
+      </div>
+      <div class="kpi kpi-neutral">
+        <div class="kpi-label">Leads diagnostics</div>
+        <div class="kpi-value" id="kpi-leads">340+</div>
+        <div class="kpi-sub">bêta · emails capturés ?</div>
+      </div>
+      <div class="kpi kpi-neutral">
+        <div class="kpi-label">RDV Pris</div>
+        <div class="kpi-value" id="kpi-meetings">0</div>
+        <div class="kpi-sub">via Calendly</div>
+      </div>
+      <div class="kpi kpi-neutral">
+        <div class="kpi-label">Score Site</div>
+        <div class="kpi-value">6/10</div>
+        <div class="kpi-sub">Objectif : 8.5 — post-actions</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Santé du Produit — Axes clés</div>
+        <div class="score-row">
+          <div class="score-label">Proposition de valeur</div>
+          <div class="score-bar"><div class="score-fill" style="width: 70%"></div></div>
+          <div class="score-num">7</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">Crédibilité / Preuve sociale</div>
+          <div class="score-bar"><div class="score-fill" style="width: 55%"></div></div>
+          <div class="score-num">5.5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">Tunnel de conversion</div>
+          <div class="score-bar"><div class="score-fill" style="width: 65%"></div></div>
+          <div class="score-num">6.5</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">Clarté de l'offre</div>
+          <div class="score-bar"><div class="score-fill" style="width: 60%"></div></div>
+          <div class="score-num">6</div>
+        </div>
+        <div class="score-row">
+          <div class="score-label">Autorité perçue</div>
+          <div class="score-bar"><div class="score-fill" style="width: 50%"></div></div>
+          <div class="score-num">5</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Blockers Restants vers le 1er Client</div>
+        <div class="blocker-row">
+          <div class="blocker-num">1</div>
+          <div class="blocker-content">
+            <div class="blocker-title">Aucun outreach actif</div>
+            <div class="blocker-desc">Le site ne suffit pas. 50 DMs LinkedIn ciblés n'ont pas été envoyés — ou pas tracés.</div>
+          </div>
+          <span class="pill pill-red">Bloquant</span>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-num">2</div>
+          <div class="blocker-content">
+            <div class="blocker-title">Tarification non exposée</div>
+            <div class="blocker-desc">Un prospect ne peut pas qualifier le budget sans prix. Frein massif à la conversion.</div>
+          </div>
+          <span class="pill pill-red">Bloquant</span>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-num">3</div>
+          <div class="blocker-content">
+            <div class="blocker-title">Études de cas vides</div>
+            <div class="blocker-desc">Yonko, MI4, Shiva mentionnés mais sans résultats. La preuve sociale ne convertit pas.</div>
+          </div>
+          <span class="pill pill-orange">Important</span>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-num">4</div>
+          <div class="blocker-content">
+            <div class="blocker-title">Post LinkedIn de lancement non posté</div>
+            <div class="blocker-desc">Le post est rédigé, l'algorithme favorise mardi/jeudi 8h-10h. Qu'est-ce qui retient ?</div>
+          </div>
+          <span class="pill pill-orange">Important</span>
+        </div>
+        <div class="blocker-row">
+          <div class="blocker-num">5</div>
+          <div class="blocker-content">
+            <div class="blocker-title">✅ V1 vs V2 — DÉCISION PRISE (11 avril 2026)</div>
+            <div class="blocker-desc"><strong>V2 (dark mode) devient daska.law.</strong> V1 reste comme landing page diagnostics top-of-funnel. V2 est la seule version qui montre les prix, le CTA avocat, et les mockups produit — les 3 éléments nécessaires pour convertir en mandat payant.</div>
+          </div>
+          <span class="pill pill-green">Tranché</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 0;">
+      <div class="card-title">Mets à jour tes KPIs</div>
+      <div class="grid-3">
+        <div>
+          <div class="input-label">CA Généré (€)</div>
+          <input class="input-field" type="number" placeholder="0" onchange="updateKPI('kpi-revenue', this.value + ' €')" />
+        </div>
+        <div>
+          <div class="input-label">RDV Calendly pris</div>
+          <input class="input-field" type="number" placeholder="0" onchange="updateKPI('kpi-meetings', this.value)" />
+        </div>
+        <div>
+          <div class="input-label">Emails capturés (diagnostics)</div>
+          <input class="input-field" type="number" placeholder="340" onchange="updateKPI('kpi-leads', this.value)" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: PIPELINE -->
+  <div id="panel-pipeline" class="panel">
+
+    <div class="push-box">
+      <div class="push-icon">💼</div>
+      <div class="push-text">
+        <strong>La règle du pipeline :</strong> Un contact sans next action dans 48h est un contact mort. Pour chaque nom ici, il doit y avoir une date et une action concrète — pas "relancer bientôt".
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div>
+        <div class="pipeline-stage">
+          <div class="pipeline-header">
+            <div class="pipeline-name">🎯 À Contacter</div>
+            <div class="pipeline-count" id="count-prospect">0 contacts</div>
+          </div>
+          <div id="stage-prospect"></div>
+          <button class="add-contact-btn" onclick="addContact('prospect')">+ Ajouter un contact</button>
+        </div>
+      </div>
+      <div>
+        <div class="pipeline-stage">
+          <div class="pipeline-header">
+            <div class="pipeline-name">💬 En Discussion</div>
+            <div class="pipeline-count" id="count-discussion">0 contacts</div>
+          </div>
+          <div id="stage-discussion"></div>
+          <button class="add-contact-btn" onclick="addContact('discussion')">+ Ajouter un contact</button>
+        </div>
+      </div>
+      <div>
+        <div class="pipeline-stage">
+          <div class="pipeline-header">
+            <div class="pipeline-name">📅 RDV Planifié</div>
+            <div class="pipeline-count" id="count-rdv">0 contacts</div>
+          </div>
+          <div id="stage-rdv"></div>
+          <button class="add-contact-btn" onclick="addContact('rdv')">+ Ajouter un contact</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Ajouter un Contact au Pipeline</div>
+      <div class="grid-3">
+        <div>
+          <div class="input-label">Nom / Entreprise</div>
+          <input class="input-field" id="new-contact-name" placeholder="Ex: Jean D. — SaaS B2B Seed" />
+        </div>
+        <div>
+          <div class="input-label">Offre ciblée</div>
+          <select class="input-field" id="new-contact-offer">
+            <option value="Clean Capital">🧹 Clean Capital</option>
+            <option value="Cool Capital">❄️ Cool Capital</option>
+            <option value="Capital Cohérence">🔭 Capital Cohérence</option>
+          </select>
+        </div>
+        <div>
+          <div class="input-label">Étape</div>
+          <select class="input-field" id="new-contact-stage">
+            <option value="prospect">À Contacter</option>
+            <option value="discussion">En Discussion</option>
+            <option value="rdv">RDV Planifié</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top: 12px;">
+        <div class="input-label">Next Action</div>
+        <input class="input-field" id="new-contact-action" placeholder="Ex: Envoyer DM LinkedIn avec lien diagnostic" />
+      </div>
+      <div style="margin-top: 12px;">
+        <button class="btn btn-primary" onclick="saveContact()">Ajouter au Pipeline</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Cibles Prioritaires à Activer Maintenant</div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">Les 50 contacts LinkedIn de la stratégie de lancement</div>
+          <div class="blocker-desc">La stratégie Mars 2026 prévoyait 50 DMs ciblés. Combien ont été envoyés ? Combien ont répondu ? Ce chiffre détermine tout.</div>
+        </div>
+        <span class="pill pill-red">Non tracé</span>
+      </div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">Yonko, MI4, Shiva — ils peuvent référer</div>
+          <div class="blocker-desc">Ces 3 clients existants sont ta meilleure source. Un email simple : "Je lance officiellement. Tu connais quelqu'un ?" — ça prend 5 minutes.</div>
+        </div>
+        <span class="pill pill-orange">Action rapide</span>
+      </div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">Réseau Alpha Legal — avocats partenaires</div>
+          <div class="blocker-desc">Des avocats partenaires peuvent prescrire Daska à leurs clients cap table. Ont-ils été briefés sur le lancement ?</div>
+        </div>
+        <span class="pill pill-blue">Levier sous-utilisé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: SPARRING QUESTIONS -->
+  <div id="panel-sparring" class="panel">
+
+    <div class="push-box">
+      <div class="push-icon">🥊</div>
+      <div class="push-text">
+        Ce ne sont pas des questions rhétoriques. <strong>Réponds par écrit</strong> — même en 3 lignes. L'écriture force la clarté. Si tu ne peux pas répondre, c'est là que le blocage réel se cache.
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-bottom: 4px;">Sur la conversion client</div>
+    <div class="section-sub">Les questions qui dérangent — parce qu'elles pointent là où l'action manque</div>
+
+    <div class="question-block">
+      <div class="question-text">Quel est le nom du prochain prospect que tu vas appeler cette semaine — pas contacter par email, appeler ?</div>
+      <div class="question-why">💡 Le téléphone convertit 3x mieux que le DM pour du conseil à plusieurs milliers d'euros. Si tu n'as pas de nom, tu n'as pas de plan.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Pourquoi un fondateur qui arrive sur daska.law devrait-il te choisir toi plutôt que de googler un avocat corporate à Paris ?</div>
+      <div class="question-why">💡 Si tu ne peux pas répondre à ça en 2 phrases, ton visiteur non plus. C'est le test de différenciation réelle.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Quel est ton prix pour une mission Clean Capital ? Pour un Cool Capital ? Et pourquoi ces prix-là ?</div>
+      <div class="question-why">💡 La tarification est absente du site — et peut-être absente dans ta tête. Un prix flou dans ton esprit = une hésitation sur un appel client = mandat perdu.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Les 340 bêta-testeurs — combien as-tu leur email ? Combien as-tu recontactés depuis le lancement du site ?</div>
+      <div class="question-why">💡 340 utilisateurs qualifiés qui ont déjà utilisé ton outil, c'est une liste chaude que 99% des startups ne possèdent pas à ce stade. L'ignorer, c'est laisser de l'argent sur la table.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title" style="margin-bottom: 4px;">Sur la stratégie et le positionnement</div>
+    <div class="section-sub">Les questions qui obligent à trancher</div>
+
+    <div class="question-block">
+      <div class="question-text">V1 ou V2 — tu choisis laquelle cette semaine, et tu fermes l'autre. Qu'est-ce qui te retient de trancher ?</div>
+      <div class="question-why">💡 Avoir deux versions live n'est pas une stratégie de test — c'est de l'indécision. Un visiteur qui voit deux tonalités différentes selon l'URL ne fait pas confiance à la marque.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Qui est ton client idéal exact — pas "fondateur de startup", mais un profil précis : secteur, stade, taille, problème ?</div>
+      <div class="question-why">💡 "Fondateurs et dirigeants PME" c'est trop large. Carta cible les cap tables post-Seed Series A. Ta précision détermine la qualité de chaque message que tu enverras.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Dans 12 mois, à quoi ressemble une semaine normale chez Daska.law — combien de mandats actifs, combien de revenus, combien de personnes ?</div>
+      <div class="question-why">💡 Sans vision des 12 prochains mois, chaque décision d'aujourd'hui est arbitraire. Tes priorités doivent découler de cette image.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title" style="margin-bottom: 4px;">Sur la notoriété et l'autorité</div>
+    <div class="section-sub">Le contenu qui construit, pas celui qui consomme</div>
+
+    <div class="question-block">
+      <div class="question-text">Le post LinkedIn de lancement est prêt depuis mars. Qu'est-ce qui t'a empêché de le poster — vraiment ?</div>
+      <div class="question-why">💡 La peur du jugement ralentit plus de lancements que les bugs techniques. Nommer ce qui bloque, c'est déjà le surmonter à moitié.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">Quel est le sujet sur lequel tu as un point de vue que personne d'autre dans ton réseau n'exprime clairement ?</div>
+      <div class="question-why">💡 L'autorité LinkedIn vient des points de vue distinctifs, pas du contenu "utile". Un post qui dérange ou surprend performe 5x mieux qu'un post qui informe.</div>
+      <textarea class="answer-area" placeholder="Écris ta réponse ici..."></textarea>
+    </div>
+  </div>
+
+  <!-- PANEL: PLAN D'ACTION -->
+  <div id="panel-actions" class="panel">
+
+    <div class="push-box">
+      <div class="push-icon">⚡</div>
+      <div class="push-text">
+        <strong>Règle des 3 :</strong> Chaque semaine, 3 actions max. Pas 10. Pas une liste de souhaits. 3 actions que tu peux compléter avant vendredi — et si tu ne les complètes pas, on comprend pourquoi avant de relancer.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Actions Cette Semaine — À Compléter Avant Vendredi</div>
+      <div id="weekly-actions">
+        <div class="commit-item">
+          <div class="commit-checkbox" onclick="toggleCheck(this)"></div>
+          <div class="commit-text">Confirmer si logos V2 (Kymono, Novagen, Citadel.AI, Veezoo, Noan, Greenly) sont de vrais clients — sinon les retirer avant déploiement</div>
+          <div class="commit-deadline">Aujourd'hui</div>
+        </div>
+        <div class="commit-item">
+          <div class="commit-checkbox" onclick="toggleCheck(this)"></div>
+          <div class="commit-text">Corriger la capture email V2 → Brevo API (fixer le localStorage)</div>
+          <div class="commit-deadline">Aujourd'hui</div>
+        </div>
+        <div class="commit-item">
+          <div class="commit-checkbox" onclick="toggleCheck(this)"></div>
+          <div class="commit-text">Déployer V2 sur daska.law via Netlify</div>
+          <div class="commit-deadline">Cette semaine</div>
+        </div>
+        <div class="commit-item">
+          <div class="commit-checkbox" onclick="toggleCheck(this)"></div>
+          <div class="commit-text">Poster le post LinkedIn de lancement (mardi ou jeudi, 8h-10h, lien en commentaire)</div>
+          <div class="commit-deadline">Cette semaine</div>
+        </div>
+        <div class="commit-item">
+          <div class="commit-checkbox" onclick="toggleCheck(this)"></div>
+          <div class="commit-text">Contacter Yonko, MI4 et Shiva — témoignage rédigé + autorisation logos</div>
+          <div class="commit-deadline">Cette semaine</div>
+        </div>
+      </div>
+      <div style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
+        <input class="input-field" id="new-action-text" placeholder="Ajouter une action..." style="flex: 1;" />
+        <button class="btn btn-primary" onclick="addWeeklyAction()">Ajouter</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Backlog — Actions Prioritaires par Impact</div>
+
+      <div class="action-item">
+        <span class="action-priority prio-1">P1</span>
+        <div class="action-body">
+          <div class="action-title">Définir et afficher une grille tarifaire sur le site</div>
+          <div class="action-desc">Même indicative (ex: "À partir de 2 500 €"). L'absence de prix est le frein de conversion n°1 pour du conseil premium.</div>
+          <div class="action-effort">⏱ 1h · Impact direct sur la conversion des prospects</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-priority prio-1">P1</span>
+        <div class="action-body">
+          <div class="action-title">Transformer Yonko / MI4 / Shiva en vraies études de cas</div>
+          <div class="action-desc">Format : Entreprise + secteur + stade · Problème · Solution Daska · Résultat mesurable. Un paragraphe suffit si le résultat est concret.</div>
+          <div class="action-effort">⏱ 2h · Multiplier la crédibilité perçue par 3</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-priority prio-1">P1</span>
+        <div class="action-body">
+          <div class="action-title">✅ V1 vs V2 tranché — Confirmer que logos V2 (Kymono, Novagen, Citadel.AI, Veezoo, Noan, Greenly) sont vrais</div>
+          <div class="action-desc">Si logos réels → les garder, demander autorisation écrite. Si fictifs → retirer immédiatement avant déploiement. Logos faux = risque légal + crédibilité détruite si un prospect vérifie.</div>
+          <div class="action-effort">⏱ 15min de vérification — bloquant pour le déploiement V2</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-priority prio-1">P1</span>
+        <div class="action-body">
+          <div class="action-title">Fixer la capture email → Brevo (sur V2 avant déploiement)</div>
+          <div class="action-desc">L'email gate actuel stocke dans localStorage uniquement — aucun contact capturé. Ajouter un appel API Brevo à chaque soumission. Chaque nouveau diagnostic alimente ta liste en temps réel.</div>
+          <div class="action-effort">⏱ 30min de code · Bloquant pour toute stratégie email</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-priority prio-1">P1</span>
+        <div class="action-body">
+          <div class="action-title">Basculer daska-law-dark-mode.netlify.app → daska.law (V2 en production)</div>
+          <div class="action-desc">Via Netlify : configurer le domaine custom daska.law pour pointer sur le site daska-law-dark-mode. Ou déployer V2 directement dans le repo daska-law.</div>
+          <div class="action-effort">⏱ 10min sur Netlify dashboard — déploiement immédiat</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-priority prio-2">P2</span>
+        <div class="action-body">
+          <div class="action-title">Email aux 340 bêta-utilisateurs — séquence de réactivation</div>
+          <div class="action-desc">"Tu as fait le diagnostic il y a quelques semaines. Voici ce que nous avons amélioré. Prêt à passer à l'étape suivante ?" Simple, direct, une CTA Calendly.</div>
+          <div class="action-effort">⏱ 45min · Pipeline direct depuis ta liste existante</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-priority prio-2">P2</span>
+        <div class="action-body">
+          <div class="action-title">Créer la page entreprise LinkedIn Daska.law</div>
+          <div class="action-desc">Tagline, description, logo, lien site. Nécessaire pour crédibilité + futur LinkedIn Ads. La stratégie est déjà rédigée.</div>
+          <div class="action-effort">⏱ 15min · Signal de sérieux institutionnel</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-priority prio-2">P2</span>
+        <div class="action-body">
+          <div class="action-title">Ajouter les chiffres d'autorité sur le site</div>
+          <div class="action-desc">"100+ cap tables analysées, 20+ restructurations, 4.8/5 satisfaction bêta". Ces chiffres existent — ils doivent être visibles dès la homepage.</div>
+          <div class="action-effort">⏱ 20min · Crédibilité immédiate</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <span class="action-priority prio-3">P3</span>
+        <div class="action-body">
+          <div class="action-title">Premier article LinkedIn long-form sur un sujet cap table concret</div>
+          <div class="action-desc">Exemple : "Les 3 erreurs de cap table qui font foirer une levée de fonds Série A" — concret, actionnable, partageable par les fondateurs.</div>
+          <div class="action-effort">⏱ 2h · Construit l'autorité organique sur le long terme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: EXIT ROADMAP -->
+  <div id="panel-exit" class="panel">
+
+    <div class="push-box">
+      <div class="push-icon">🚀</div>
+      <div class="push-text">
+        <strong>Construire pour l'exit dès le jour 1 :</strong> Ça ne veut pas dire penser à vendre maintenant. Ça veut dire prendre des décisions qui créent de la valeur acquisitionnable — data propriétaire, marque forte, revenus récurrents, processus documentés.
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-bottom: 4px;">Roadmap vers la valeur de sortie</div>
+    <div class="section-sub">4 phases — tu es au début de la Phase 1</div>
+
+    <div style="padding: 8px 0;">
+      <div class="milestone">
+        <div class="milestone-dot active">🎯</div>
+        <div class="milestone-body">
+          <div class="milestone-phase">Phase 1 · Maintenant → 6 mois</div>
+          <div class="milestone-title">Validation Commerciale</div>
+          <div class="milestone-desc">Premier mandat signé. 5 clients payants. Proposition de valeur prouvée sur au moins 2 des 3 offres. Pipeline récurrent minimal. Le modèle existe — il n'est pas encore scalable.</div>
+          <div class="milestone-kpi">KPI sortie : 5 mandats signés · MRR 10k€ · NPS > 8</div>
+          <div class="tag-row">
+            <span class="tag">1er client payant</span>
+            <span class="tag">Offre principale identifiée</span>
+            <span class="tag">Playbook de vente</span>
+            <span class="tag">Case studies réels</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot future">📈</div>
+        <div class="milestone-body">
+          <div class="milestone-phase">Phase 2 · 6 → 18 mois</div>
+          <div class="milestone-title">Traction & Autorité Marché</div>
+          <div class="milestone-desc">20+ clients actifs. Présence LinkedIn établie (5k+ abonnés qualifiés). Partenariats avocats/experts-comptables prescripteurs. Revenu récurrent via abonnement diagnostics ou retainer. Daska est une référence connue dans l'écosystème startup français.</div>
+          <div class="milestone-kpi">KPI sortie : ARR 150k€ · 20 clients · 3 partenaires prescripteurs actifs</div>
+          <div class="tag-row">
+            <span class="tag">Partenariats prescripteurs</span>
+            <span class="tag">MRR récurrent</span>
+            <span class="tag">Notoriété sectorielle</span>
+            <span class="tag">Contenu d'autorité</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot future">🏗️</div>
+        <div class="milestone-body">
+          <div class="milestone-phase">Phase 3 · 18 → 36 mois</div>
+          <div class="milestone-title">Scalabilité & Data Propriétaire</div>
+          <div class="milestone-desc">Base de données cap table unique (100k+ diagnostics). IA entraînée sur données propriétaires. Équipe (1-2 avocats + 1 growth). Processus documentés et reproductibles. Marque visible au niveau européen. Potentiel d'acquisition par un cabinet, une legaltech ou une fintech cap table.</div>
+          <div class="milestone-kpi">KPI sortie : ARR 1M€ · 100k+ diagnostics · Base données différenciante</div>
+          <div class="tag-row">
+            <span class="tag">Data moat</span>
+            <span class="tag">Équipe</span>
+            <span class="tag">Processus scalables</span>
+            <span class="tag">Marque européenne</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-dot future">🏆</div>
+        <div class="milestone-body">
+          <div class="milestone-phase">Phase 4 · 36+ mois</div>
+          <div class="milestone-title">Exit ou Expansion</div>
+          <div class="milestone-desc">3 scénarios possibles : (1) Acquisition par une legaltech (Juro, Leeway, Legito) ou fintech (Qonto, Pennylane) cherchant le segment cap table FR. (2) Rapprochement avec un grand cabinet d'avocats cherchant la digitalisation. (3) Expansion européenne autonome avec levée de fonds. La valeur d'acquisition dépend du moat data + ARR récurrent + marque.</div>
+          <div class="milestone-kpi">Valorisation cible : 3-10x ARR selon profil acquéreur</div>
+          <div class="tag-row">
+            <span class="tag">Acquisition legaltech</span>
+            <span class="tag">Fusion cabinet</span>
+            <span class="tag">Expansion EU</span>
+            <span class="tag">3-10x ARR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Ce que tu dois construire DÈS MAINTENANT pour l'exit</div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">Traçabilité des résultats clients</div>
+          <div class="blocker-desc">Chaque mandat doit avoir un avant/après mesurable (montant levée, % conflits résolus, économies fiscales). C'est ce que valorise un acquéreur, pas le CA seul.</div>
+        </div>
+        <span class="pill pill-green">Construire maintenant</span>
+      </div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">Base email propriétaire et non-exportable</div>
+          <div class="blocker-desc">Chaque email capturé via les diagnostics est un asset. Il faut un CRM simple dès le 1er client (Notion, Airtable, ou HubSpot Free).</div>
+        </div>
+        <span class="pill pill-green">Construire maintenant</span>
+      </div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">IP différenciante sur les diagnostics</div>
+          <div class="blocker-desc">Les 5 diagnostics et leur méthodologie doivent être documentés, protégés et présentables comme propriété intellectuelle. C'est un actif, pas juste un outil marketing.</div>
+        </div>
+        <span class="pill pill-orange">Dans les 3 mois</span>
+      </div>
+      <div class="blocker-row">
+        <div class="blocker-content">
+          <div class="blocker-title">Nom de marque et positionnement stables</div>
+          <div class="blocker-desc">Daska.law doit rester cohérent — un acquéreur n'achète pas une marque en chantier. Plus vite tu tranches V1/V2 et tu stabilises, plus vite la marque construit de la valeur.</div>
+        </div>
+        <span class="pill pill-orange">Dans les 3 mois</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: JOURNAL DE SESSION -->
+  <div id="panel-session" class="panel">
+
+    <div class="push-box">
+      <div class="push-icon">📓</div>
+      <div class="push-text">
+        <strong>Utilisation :</strong> À chaque session de travail sur Daska, ouvre ce journal. Note ce que tu as fait, ce que tu n'as pas fait et pourquoi. L'honnêteté ici est le seul antidote à la procrastination invisible.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Nouvelle Session</div>
+      <div class="input-label">Date</div>
+      <input class="input-field" id="session-date" type="date" />
+
+      <div class="input-label">Ce que j'avais prévu de faire depuis la dernière session</div>
+      <textarea class="answer-area" id="session-planned" placeholder="Qu'est-ce que tu t'étais engagé à faire ?"></textarea>
+
+      <div class="input-label">Ce que j'ai réellement fait</div>
+      <textarea class="answer-area" id="session-done" placeholder="Sois précis. Pas 'j'ai travaillé sur le site' — mais quoi, combien de temps, quel résultat."></textarea>
+
+      <div class="input-label">Ce que je n'ai pas fait — et pourquoi vraiment</div>
+      <textarea class="answer-area" id="session-notdone" placeholder="Pas d'excuse, pas de justification. Juste la vérité sur ce qui t'a retenu."></textarea>
+
+      <div class="input-label">Ma décision principale pour cette session</div>
+      <textarea class="answer-area" id="session-decision" placeholder="Quelle est la 1 chose que tu vas faire avant la prochaine session ?" style="min-height: 50px;"></textarea>
+
+      <div style="margin-top: 14px; display: flex; gap: 8px;">
+        <button class="btn btn-primary" onclick="saveSession()">Enregistrer la session</button>
+        <button class="btn btn-secondary" onclick="clearSession()">Effacer</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Historique des Sessions</div>
+      <div id="session-history">
+        <div style="color: var(--text3); font-size: 13px; text-align: center; padding: 20px 0;">
+          Aucune session enregistrée. Commence à tracer ton travail.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // --- INIT ---
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('currentDate').textContent = 'Mis à jour le ' + new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    loadFromStorage();
+  });
+
+  // --- TABS ---
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // --- KPI UPDATE ---
+  function updateKPI(id, value) {
+    document.getElementById(id).textContent = value;
+    saveToStorage();
+  }
+
+  // --- CHECKBOXES ---
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const text = el.nextElementSibling;
+    text.classList.toggle('done', el.classList.contains('done'));
+    saveToStorage();
+  }
+
+  // --- ADD WEEKLY ACTION ---
+  function addWeeklyAction() {
+    const text = document.getElementById('new-action-text').value.trim();
+    if (!text) return;
+
+    const container = document.getElementById('weekly-actions');
+    const item = document.createElement('div');
+    item.className = 'commit-item';
+    item.innerHTML = `
+      <div class="commit-checkbox" onclick="toggleCheck(this)"></div>
+      <div class="commit-text">${text}</div>
+      <div class="commit-deadline">Cette semaine</div>
+    `;
+    container.appendChild(item);
+    document.getElementById('new-action-text').value = '';
+    saveToStorage();
+  }
+
+  // --- PIPELINE ---
+  const pipelineData = { prospect: [], discussion: [], rdv: [] };
+
+  function addContact(stage) {
+    const name = prompt('Nom / Entreprise :');
+    if (!name) return;
+    const offer = prompt('Offre (Clean Capital / Cool Capital / Capital Cohérence) :') || 'Non définie';
+    const action = prompt('Next Action :') || '—';
+    pipelineData[stage].push({ name, offer, action });
+    renderPipeline();
+    saveToStorage();
+  }
+
+  function saveContact() {
+    const name = document.getElementById('new-contact-name').value.trim();
+    const offer = document.getElementById('new-contact-offer').value;
+    const stage = document.getElementById('new-contact-stage').value;
+    const action = document.getElementById('new-contact-action').value.trim();
+    if (!name) return;
+    pipelineData[stage].push({ name, offer, action: action || '—' });
+    document.getElementById('new-contact-name').value = '';
+    document.getElementById('new-contact-action').value = '';
+    renderPipeline();
+    saveToStorage();
+  }
+
+  function renderPipeline() {
+    const colors = { prospect: '#6366f1', discussion: '#f97316', rdv: '#3ecf8e' };
+    ['prospect', 'discussion', 'rdv'].forEach(stage => {
+      const el = document.getElementById('stage-' + stage);
+      const count = document.getElementById('count-' + stage);
+      count.textContent = pipelineData[stage].length + ' contact' + (pipelineData[stage].length !== 1 ? 's' : '');
+      el.innerHTML = pipelineData[stage].map(c => `
+        <div class="pipeline-contact">
+          <div class="contact-dot" style="background: ${colors[stage]}"></div>
+          <div class="contact-name">${c.name}</div>
+          <div class="contact-offer">${c.offer}</div>
+          <div class="contact-action">${c.action}</div>
+        </div>
+      `).join('');
+    });
+  }
+
+  // --- SESSION LOG ---
+  const sessions = [];
+
+  function saveSession() {
+    const date = document.getElementById('session-date').value;
+    const planned = document.getElementById('session-planned').value.trim();
+    const done = document.getElementById('session-done').value.trim();
+    const notdone = document.getElementById('session-notdone').value.trim();
+    const decision = document.getElementById('session-decision').value.trim();
+
+    if (!date && !done) return;
+
+    sessions.unshift({ date, planned, done, notdone, decision, timestamp: Date.now() });
+    renderSessions();
+    clearSession();
+    saveToStorage();
+  }
+
+  function clearSession() {
+    ['session-planned', 'session-done', 'session-notdone', 'session-decision'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('session-date').value = '';
+  }
+
+  function renderSessions() {
+    const container = document.getElementById('session-history');
+    if (sessions.length === 0) {
+      container.innerHTML = '<div style="color: var(--text3); font-size: 13px; text-align: center; padding: 20px 0;">Aucune session enregistrée.</div>';
+      return;
+    }
+    container.innerHTML = sessions.map(s => `
+      <div style="border-bottom: 1px solid var(--border); padding: 16px 0;">
+        <div style="font-weight: 600; font-size: 13px; margin-bottom: 10px; color: var(--accent);">
+          ${s.date ? new Date(s.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : 'Date non définie'}
+        </div>
+        ${s.done ? `<div style="margin-bottom: 8px;"><span style="color: var(--text3); font-size: 11px; text-transform: uppercase; font-weight: 600;">Réalisé</span><div style="font-size: 13px; margin-top: 3px;">${s.done}</div></div>` : ''}
+        ${s.notdone ? `<div style="margin-bottom: 8px;"><span style="color: var(--text3); font-size: 11px; text-transform: uppercase; font-weight: 600;">Non réalisé</span><div style="font-size: 13px; color: var(--text2); margin-top: 3px;">${s.notdone}</div></div>` : ''}
+        ${s.decision ? `<div><span style="color: var(--accent2); font-size: 11px; text-transform: uppercase; font-weight: 600;">Décision</span><div style="font-size: 13px; margin-top: 3px;">${s.decision}</div></div>` : ''}
+      </div>
+    `).join('');
+  }
+
+  // --- PERSISTENCE ---
+  function saveToStorage() {
+    try {
+      const data = {
+        pipeline: pipelineData,
+        sessions: sessions,
+      };
+      localStorage.setItem('daska_sparring', JSON.stringify(data));
+    } catch(e) {}
+  }
+
+  function loadFromStorage() {
+    try {
+      const raw = localStorage.getItem('daska_sparring');
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (data.pipeline) {
+        Object.assign(pipelineData, data.pipeline);
+        renderPipeline();
+      }
+      if (data.sessions) {
+        sessions.push(...data.sessions);
+        renderSessions();
+      }
+    } catch(e) {}
+  }
+</script>
+</body>
+</html>

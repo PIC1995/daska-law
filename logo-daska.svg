@@ -1,0 +1,23 @@
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-daska" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3ecf8e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Geometric symbol - 4 interlocking squares -->
+  <g stroke="url(#grad-daska)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top-left -->
+    <rect x="12" y="12" width="20" height="20" rx="2"/>
+    <!-- Top-right -->
+    <rect x="48" y="12" width="20" height="20" rx="2"/>
+    <!-- Bottom-left -->
+    <rect x="12" y="48" width="20" height="20" rx="2"/>
+    <!-- Bottom-right -->
+    <rect x="48" y="48" width="20" height="20" rx="2"/>
+
+    <!-- Connection lines forming spiral -->
+    <path d="M 32 22 L 48 22 M 58 32 L 58 48 M 48 58 L 32 58 M 22 48 L 22 32"/>
+  </g>
+</svg>

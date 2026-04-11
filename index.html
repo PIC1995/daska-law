@@ -858,17 +858,17 @@ footer {
   </div>
 </section>
 
-<!-- ══ LOGOS BAR ══ -->
+<!-- ══ EXPERTISES BAR ══ -->
 <div class="logos-bar">
   <div class="logos-bar-inner">
-    <div class="logos-label">Ils nous font confiance</div>
+    <div class="logos-label">Secteurs accompagnés</div>
     <div class="logos-list">
-      <div class="logo-item">Kymono</div>
-      <div class="logo-item">Novagen</div>
-      <div class="logo-item">Citadel.AI</div>
-      <div class="logo-item">Veezoo</div>
-      <div class="logo-item">Noan</div>
-      <div class="logo-item">Greenly</div>
+      <div class="logo-item">🚀 SaaS B2B</div>
+      <div class="logo-item">💊 HealthTech</div>
+      <div class="logo-item">🤖 IA &amp; DeepTech</div>
+      <div class="logo-item">🏪 Retail &amp; E-commerce</div>
+      <div class="logo-item">🏗️ PropTech</div>
+      <div class="logo-item">⚡ GreenTech</div>
     </div>
   </div>
 </div>
@@ -1183,62 +1183,183 @@ footer {
 </section>
 
 <!-- ══ OFFRES ══ -->
-<section class="section" id="offres" style="background:#fff;">
+<!-- ══ OFFRES ══ -->
+<section class="section" id="offres" style="background:var(--c-bg);">
   <div class="wrap">
     <div class="anim" style="text-align:center;margin-bottom:var(--s5);">
       <div class="section-tag tag-blue" style="margin:0 auto var(--s2);">Nos accompagnements</div>
-      <h2 class="display section-h2">Trois offres.<br>Un seul objectif.</h2>
-      <p class="section-sub" style="margin:0 auto;">De la conformité à la stratégie long terme — choisissez le niveau adapté.</p>
+      <h2 class="display section-h2">Trois offres.<br>Un seul objectif : votre capital maîtrisé.</h2>
+      <p class="section-sub" style="margin:0 auto;max-width:560px;">De la conformité légale à l'ouverture stratégique du capital — chaque offre est un mandat à périmètre défini, avec un livrable concret et un avocat dédié.</p>
     </div>
 
-    <div class="offres-grid-v2">
+    <!-- CARDS OFFRES -->
+    <div class="offres-grid-v2" style="margin-bottom:var(--s6);">
 
-      <div class="offre-card-v2 anim anim-d1">
+      <!-- CLEAN CAPITAL -->
+      <div class="offre-card-v2 anim anim-d1" id="card-clean">
         <div class="offre-icon-v2" style="background:rgba(0,200,122,.1);">🧹</div>
-        <h3 class="offre-name-v2">Clean Capital</h3>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+          <h3 class="offre-name-v2" style="margin:0;">Clean Capital</h3>
+          <div style="text-align:right;">
+            <div style="font-size:1.5rem;font-weight:800;color:var(--c-green);font-family:var(--ff-display);">999 €</div>
+            <div style="font-size:.7rem;color:var(--c-ink2);">HT · paiement à la commande</div>
+          </div>
+        </div>
         <p class="offre-subtitle-v2" style="color:var(--c-green);">Mise en conformité de votre cap table</p>
-        <p class="offre-desc-v2">Audit complet de votre structure actionnariale, détection des risques juridiques, plan de mise en conformité avec un avocat spécialisé.</p>
-        <ul class="offre-feats-v2">
-          <li><span class="feat-dot feat-dot-green">✓</span>Audit cap table &amp; pacte d'associés</li>
-          <li><span class="feat-dot feat-dot-green">✓</span>Identification des risques bloquants</li>
-          <li><span class="feat-dot feat-dot-green">✓</span>Roadmap de mise en conformité</li>
-          <li><span class="feat-dot feat-dot-green">✓</span>Suivi avocat dédié</li>
-        </ul>
-        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-outline btn-md offre-cta-v2">Discuter de mon cap table →</a>
+        <p class="offre-desc-v2" style="color:var(--c-ink2);">Votre capital est-il légalement tenu ? Registres à jour, ordres de mouvement signés, propriété des titres prouvable ? Si vous ne pouvez pas répondre avec certitude, c'est un risque bloquant avant toute levée ou cession.</p>
+
+        <div style="background:rgba(0,200,122,.06);border:1px solid rgba(0,200,122,.15);border-radius:10px;padding:14px 16px;margin-bottom:var(--s3);">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-green);margin-bottom:8px;">Ce que vous recevez</div>
+          <ul class="offre-feats-v2" style="margin:0;">
+            <li><span class="feat-dot feat-dot-green">✓</span><span>Rapport de conformité capitalistique</span></li>
+            <li><span class="feat-dot feat-dot-green">✓</span><span>Identification des risques et non-conformités</span></li>
+            <li><span class="feat-dot feat-dot-green">✓</span><span>Table de capitalisation actualisée et certifiée</span></li>
+            <li><span class="feat-dot feat-dot-green">✓</span><span>Recommandations de mise en conformité</span></li>
+            <li><span class="feat-dot feat-dot-green">✓</span><span>30 min de RDV avocat spécialisé</span></li>
+          </ul>
+        </div>
+
+        <div style="font-size:.75rem;color:var(--c-ink2);margin-bottom:var(--s3);padding:10px 12px;background:var(--c-card);border-radius:8px;border:1px solid var(--c-border);">
+          <strong style="color:var(--c-ink);">Pour qui :</strong> SAS ou SARL, jusqu'à 10 associés. Post-création, avant levée de fonds, ou après une cession de titres non formalisée.
+        </div>
+
+        <button class="btn btn-outline btn-md offre-cta-v2" onclick="openOnboarding('clean')" style="margin-bottom:10px;">
+          Voir le process étape par étape →
+        </button>
+        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-ghost btn-sm offre-cta-v2">
+          Réserver un appel de cadrage →
+        </a>
       </div>
 
-      <div class="offre-card-v2 featured-v2 anim anim-d2">
+      <!-- COOL CAPITAL -->
+      <div class="offre-card-v2 featured-v2 anim anim-d2" id="card-cool">
         <div class="offre-popular-v2">⭐ Le plus demandé</div>
         <div class="offre-icon-v2" style="background:rgba(255,61,0,.12);">❄️</div>
-        <h3 class="offre-name-v2 white">Cool Capital</h3>
-        <p class="offre-subtitle-v2" style="color:var(--c-orange);">Gestion des conflits entre associés</p>
-        <p class="offre-desc-v2 muted">Médiation stratégique et juridique pour dénouer les tensions entre fondateurs et protéger la valeur de l'entreprise.</p>
-        <ul class="offre-feats-v2">
-          <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span>Diagnostic des tensions associés</li>
-          <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span>Médiation structurée avec avocat</li>
-          <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span>Réécriture du pacte si nécessaire</li>
-          <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span>Plan de sortie ou de réconciliation</li>
-        </ul>
-        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-primary btn-md offre-cta-v2">Gérer mon conflit →</a>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+          <h3 class="offre-name-v2 white" style="margin:0;">Cool Capital</h3>
+          <div style="text-align:right;">
+            <div style="font-size:1.1rem;font-weight:700;color:var(--c-orange);font-family:var(--ff-display);">Sur devis</div>
+            <div style="font-size:.7rem;color:rgba(255,255,255,.4);">selon complexité du dossier</div>
+          </div>
+        </div>
+        <p class="offre-subtitle-v2" style="color:var(--c-orange);">Prévention et gestion des conflits entre associés</p>
+        <p class="offre-desc-v2 muted">Un désaccord persistant entre fondateurs coûte plus cher que sa résolution. Blocage de décisions, départ non planifié, guerre de tranchées — chaque semaine d'inaction détruit de la valeur.</p>
+
+        <div style="background:rgba(255,61,0,.08);border:1px solid rgba(255,61,0,.18);border-radius:10px;padding:14px 16px;margin-bottom:var(--s3);">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-orange);margin-bottom:8px;">Ce que vous recevez</div>
+          <ul class="offre-feats-v2" style="margin:0;">
+            <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span><span>Diagnostic des tensions et des points de blocage</span></li>
+            <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span><span>Médiation structurée (ensemble ou individuellement)</span></li>
+            <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span><span>Protocole de règlement amiable rédigé</span></li>
+            <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span><span>Mise en œuvre juridique (cession, gouvernance...)</span></li>
+            <li class="dark-li"><span class="feat-dot feat-dot-orange">✓</span><span>1h30 de RDV avocat (individuel ou collectif)</span></li>
+          </ul>
+        </div>
+
+        <div style="font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:var(--s3);padding:10px 12px;background:rgba(255,255,255,.04);border-radius:8px;border:1px solid rgba(255,255,255,.08);">
+          <strong style="color:rgba(255,255,255,.75);">Pour qui :</strong> Startup multi-fondateurs avec tensions persistantes, désaccord sur la stratégie, associé souhaitant sortir, ou préparation à une levée avec gouvernance fragile.
+        </div>
+
+        <button class="btn btn-primary btn-md offre-cta-v2" onclick="openOnboarding('cool')" style="margin-bottom:10px;">
+          Voir le process étape par étape →
+        </button>
+        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-ghost-w btn-sm offre-cta-v2">
+          Réserver un appel de cadrage →
+        </a>
       </div>
 
-      <div class="offre-card-v2 anim anim-d3">
+      <!-- CAPITAL COHÉRENCE -->
+      <div class="offre-card-v2 anim anim-d3" id="card-coherence">
         <div class="offre-icon-v2" style="background:rgba(22,0,255,.08);">🔭</div>
-        <h3 class="offre-name-v2">Capital Cohérence</h3>
-        <p class="offre-subtitle-v2" style="color:var(--c-primary);">Diagnostic stratégique de votre capital</p>
-        <p class="offre-desc-v2">Vision à 360° : structure, valorisation, gouvernance, leviers de valeur. Pour décider avec clarté, pas avec l'intuition.</p>
-        <ul class="offre-feats-v2">
-          <li><span class="feat-dot feat-dot-blue">✓</span>Analyse complète structure &amp; valorisation</li>
-          <li><span class="feat-dot feat-dot-blue">✓</span>Cartographie des leviers de valeur</li>
-          <li><span class="feat-dot feat-dot-blue">✓</span>Scénarios levée / cession / holding</li>
-          <li><span class="feat-dot feat-dot-blue">✓</span>Plan d'actions priorisé 12 mois</li>
-        </ul>
-        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-outline btn-md offre-cta-v2">Analyser mon capital →</a>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+          <h3 class="offre-name-v2" style="margin:0;">Capital Cohérence</h3>
+          <div style="text-align:right;">
+            <div style="font-size:1.1rem;font-weight:700;color:var(--c-primary);font-family:var(--ff-display);">Sur devis</div>
+            <div style="font-size:.7rem;color:var(--c-ink2);">selon nombre de bénéficiaires</div>
+          </div>
+        </div>
+        <p class="offre-subtitle-v2" style="color:var(--c-primary);">Ouverture stratégique du capital à vos hommes-clefs</p>
+        <p class="offre-desc-v2" style="color:var(--c-ink2);">Votre COO, CTO ou directeur commercial mérite d'être associé — mais comment, combien, avec quelles conditions ? BSPCE, BSA, actions gratuites : chaque mécanisme a des effets différents sur la dilution et la fiscalité.</p>
+
+        <div style="background:rgba(22,0,255,.05);border:1px solid rgba(22,0,255,.15);border-radius:10px;padding:14px 16px;margin-bottom:var(--s3);">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-primary);margin-bottom:8px;">Ce que vous recevez</div>
+          <ul class="offre-feats-v2" style="margin:0;">
+            <li><span class="feat-dot feat-dot-blue">✓</span><span>Identification des profils à associer et des mécanismes adaptés</span></li>
+            <li><span class="feat-dot feat-dot-blue">✓</span><span>Recommandation du schéma d'intéressement (BSPCE / BSA / AGA)</span></li>
+            <li><span class="feat-dot feat-dot-blue">✓</span><span>Plan d'action et management package défini</span></li>
+            <li><span class="feat-dot feat-dot-blue">✓</span><span>Documentation corporate et contractuelle rédigée</span></li>
+            <li><span class="feat-dot feat-dot-blue">✓</span><span>40 min de RDV avocat + mise en place comptabilité actions</span></li>
+          </ul>
+        </div>
+
+        <div style="font-size:.75rem;color:var(--c-ink2);margin-bottom:var(--s3);padding:10px 12px;background:var(--c-card);border-radius:8px;border:1px solid var(--c-border);">
+          <strong style="color:var(--c-ink);">Pour qui :</strong> Dirigeant en croissance préparant une levée de fonds, souhaitant fidéliser des managers, ou structurant son capital avant une cession.
+        </div>
+
+        <button class="btn btn-outline btn-md offre-cta-v2" onclick="openOnboarding('coherence')" style="margin-bottom:10px;">
+          Voir le process étape par étape →
+        </button>
+        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-ghost btn-sm offre-cta-v2">
+          Réserver un appel de cadrage →
+        </a>
       </div>
 
+    </div><!-- /offres-grid -->
+
+    <!-- GARANTIES -->
+    <div class="anim" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:24px;background:var(--c-card);border:1px solid var(--c-border);border-radius:16px;">
+      <div style="text-align:center;padding:8px;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🔒</div>
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Confidentialité totale</div>
+        <div style="font-size:.78rem;color:var(--c-ink2);">Vos documents et informations sont protégés par le secret professionnel de l'avocat</div>
+      </div>
+      <div style="text-align:center;padding:8px;border-left:1px solid var(--c-border);border-right:1px solid var(--c-border);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">📋</div>
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Périmètre défini</div>
+        <div style="font-size:.78rem;color:var(--c-ink2);">Chaque offre a un livrable précis. Vous savez exactement ce que vous obtenez avant de commander</div>
+      </div>
+      <div style="text-align:center;padding:8px;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">⚡</div>
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:4px;">Résultat en 5–10 jours</div>
+        <div style="font-size:.78rem;color:var(--c-ink2);">De la commande au livrable, pas de délais judiciaires. Un calendrier clair dès le démarrage</div>
+      </div>
     </div>
+
   </div>
 </section>
+
+<!-- ══ MODALS ONBOARDING ══ -->
+<div id="onboarding-overlay" style="display:none;position:fixed;inset:0;background:rgba(12,12,26,.85);backdrop-filter:blur(8px);z-index:9000;overflow-y:auto;padding:40px 20px;" onclick="closeOnboarding(event)">
+  <div id="onboarding-modal" style="max-width:680px;margin:0 auto;background:var(--c-dark, #13131f);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;" onclick="event.stopPropagation()">
+
+    <!-- Header dynamique -->
+    <div id="onb-header" style="padding:28px 32px 20px;border-bottom:1px solid rgba(255,255,255,.08);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div id="onb-tag" style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;"></div>
+          <div id="onb-title" style="font-family:var(--ff-display);font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.03em;"></div>
+          <div id="onb-subtitle" style="font-size:.88rem;color:rgba(255,255,255,.5);margin-top:4px;"></div>
+        </div>
+        <button onclick="closeOnboarding()" style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);font-size:1.2rem;width:36px;height:36px;border-radius:50%;cursor:pointer;flex-shrink:0;">✕</button>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div id="onb-steps" style="padding:28px 32px;"></div>
+
+    <!-- Livrable -->
+    <div id="onb-deliverable" style="margin:0 32px 28px;padding:20px;border-radius:12px;"></div>
+
+    <!-- CTA -->
+    <div style="padding:0 32px 32px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a id="onb-cta" href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="flex:1;justify-content:center;text-decoration:none;">
+        Démarrer — Réserver mon appel →
+      </a>
+      <button onclick="closeOnboarding()" class="btn btn-ghost-w btn-lg" style="flex:0;white-space:nowrap;">Fermer</button>
+    </div>
+
+  </div>
+</div>
 
 <!-- ══ TESTIMONIALS ══ -->
 <section class="section testi-section-v2" id="temoignages">
@@ -1505,6 +1626,125 @@ function cookieChoice(accepted) {
   const b = document.getElementById('cookie-banner');
   b.style.transform = 'translateY(100%)';
   setTimeout(() => b.remove(), 400);
+}
+</script>
+
+<script>
+/* ══ ONBOARDING MODALS ══ */
+const ONBOARDING = {
+  clean: {
+    tag: '🧹 Clean Capital — 999 € HT',
+    tagColor: '#00c87a',
+    title: 'Comment se déroule votre mission',
+    subtitle: 'De la commande au livrable — en 5 à 7 jours ouvrés',
+    steps: [
+      { num:'01', icon:'📋', title:'Diagnostic on-boarding', desc:'Vous répondez au questionnaire de conformité capitalistique : répartition du capital, existence des registres, justification de la propriété des titres. 10 minutes, en ligne.' },
+      { num:'02', icon:'✍️', title:'Signature & paiement', desc:'Vous signez le bon de commande en ligne et réglez les 999 € HT par carte ou virement. La mission démarre à réception.' },
+      { num:'03', icon:'📁', title:'Upload de vos documents', desc:'Vous déposez via notre espace sécurisé : statuts à jour, K-bis, ordres de mouvement, actes de cession, registre des mouvements de titres.' },
+      { num:'04', icon:'📞', title:'RDV avocat — 30 minutes', desc:'Un avocat spécialisé en droit des sociétés analyse votre dossier et échange avec vous en visio ou en présentiel. Questions posées, contexte clarifié.' },
+      { num:'05', icon:'📊', title:'Rapport + Table de capitalisation', desc:'Vous recevez votre rapport de conformité (risques identifiés, solutions recommandées) et votre table de capitalisation actualisée et certifiée.' },
+    ],
+    deliverable: { color:'rgba(0,200,122,.08)', border:'rgba(0,200,122,.2)', title:'📦 Livrable final', items:['Rapport de conformité capitalistique (PDF)', 'Table de capitalisation actualisée et certifiée', 'Recommandations de mise en conformité priorisées', 'Vous restez libre de poursuivre ou non la mission'] }
+  },
+  cool: {
+    tag: '❄️ Cool Capital — Sur devis',
+    tagColor: '#ff3d00',
+    title: 'Comment se déroule votre mission',
+    subtitle: 'Un processus structuré pour dénouer les tensions en préservant la valeur',
+    steps: [
+      { num:'01', icon:'🔍', title:'Diagnostic on-boarding', desc:'Vous renseignez la situation : répartition du capital, nature des désaccords, historique de la relation entre associés, documents existants (pacte, statuts).' },
+      { num:'02', icon:'✍️', title:'Signature & paiement', desc:'Devis personnalisé selon la complexité du dossier. Signature et règlement avant démarrage de la mission.' },
+      { num:'03', icon:'📁', title:'Upload de vos documents', desc:'Statuts, K-bis, pacte d'associés, échanges écrits significatifs. Tout ce qui permet de comprendre la situation sans a priori.' },
+      { num:'04', icon:'🗣️', title:'RDV(s) avocat — 1h30 au total', desc:'Rencontres avec les associés, individuellement ou ensemble selon la configuration. L'avocat Daska structure le dialogue et identifie les points de blocage réels.' },
+      { num:'05', icon:'📋', title:'Analyse & présentation des solutions', desc:'Rapport de situation : diagnostic des tensions, scénarios possibles (réconciliation, rachat, sortie), recommandation argumentée.' },
+      { num:'06', icon:'⚖️', title:'Contractualisation & mise en œuvre', desc:'Rédaction du protocole de règlement amiable, modification du pacte si nécessaire, formalisation de la cession ou de la nouvelle gouvernance.' },
+    ],
+    deliverable: { color:'rgba(255,61,0,.06)', border:'rgba(255,61,0,.2)', title:'📦 Livrable final', items:['Diagnostic des tensions associés (confidentiel)', 'Protocole de règlement amiable rédigé et signé', 'Documentation juridique de mise en œuvre', 'Suivi de la mise en place de la solution retenue'] }
+  },
+  coherence: {
+    tag: '🔭 Capital Cohérence — Sur devis',
+    tagColor: '#1600ff',
+    title: 'Comment se déroule votre mission',
+    subtitle: 'De l'intention à la documentation — un plan d'intéressement complet',
+    steps: [
+      { num:'01', icon:'📋', title:'Diagnostic on-boarding', desc:'Vous identifiez les profils à associer, les objectifs (fidélisation, performance, levée à venir), et partagez votre situation capitalistique actuelle.' },
+      { num:'02', icon:'✍️', title:'Signature & paiement', desc:'Devis selon le nombre de bénéficiaires et la complexité du schéma. Signature et règlement avant démarrage.' },
+      { num:'03', icon:'📁', title:'Upload de vos documents', desc:'Statuts, K-bis, pacte d'associés, cap table actuelle, KPI et objectifs des personnes clefs concernées.' },
+      { num:'04', icon:'🔬', title:'Analyse & recommandation du schéma', desc:'L'avocat Daska analyse votre situation et recommande le mécanisme adapté : BSPCE (plus courant pour les startups), BSA, ou actions gratuites (AGA) — avec comparatif fiscal et dilution.' },
+      { num:'05', icon:'📞', title:'RDV validation — 40 minutes', desc:'Présentation du management package recommandé. Discussion avec le dirigeant et ajustements. Validation définitive du schéma avant rédaction.' },
+      { num:'06', icon:'📝', title:'Rédaction de la documentation', desc:'Rédaction de tous les actes : décision d'assemblée générale, règlement du plan, contrats individuels d'attribution, clauses de vesting.' },
+      { num:'07', icon:'📊', title:'Mise en place de la comptabilité actions', desc:'Intégration dans votre table de capitalisation, mise à jour du registre des mouvements de titres, suivi du plan d'acquisition.' },
+    ],
+    deliverable: { color:'rgba(22,0,255,.05)', border:'rgba(22,0,255,.2)', title:'📦 Livrable final', items:['Management package complet (mécanisme, conditions, vesting)', 'Documentation corporate et contractuelle rédigée', 'Table de capitalisation actualisée avec le plan', 'Guide d'explication destiné aux bénéficiaires'] }
+  }
+};
+
+function openOnboarding(type) {
+  const data = ONBOARDING[type];
+  if (!data) return;
+  document.getElementById('onb-tag').textContent = data.tag;
+  document.getElementById('onb-tag').style.color = data.tagColor;
+  document.getElementById('onb-title').textContent = data.title;
+  document.getElementById('onb-subtitle').textContent = data.subtitle;
+
+  // Steps
+  const stepsHtml = data.steps.map((s, i) => `
+    <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06);${i===data.steps.length-1?'border-bottom:none;':''}">
+      <div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:rgba(255,255,255,.4);">${s.num}</div>
+      <div style="flex:1;">
+        <div style="font-size:1rem;margin-bottom:2px;">${s.icon}</div>
+        <div style="font-weight:700;color:#fff;font-size:.92rem;margin-bottom:4px;">${s.title}</div>
+        <div style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;">${s.desc}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('onb-steps').innerHTML = stepsHtml;
+
+  // Deliverable
+  const d = data.deliverable;
+  const delivHtml = `
+    <div style="background:${d.color};border:1px solid ${d.border};border-radius:12px;padding:18px 20px;">
+      <div style="font-weight:700;color:#fff;margin-bottom:12px;">${d.title}</div>
+      ${d.items.map(item => `<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;font-size:.82rem;color:rgba(255,255,255,.65);"><span style="color:${data.tagColor};flex-shrink:0;">✓</span>${item}</div>`).join('')}
+    </div>`;
+  document.getElementById('onb-deliverable').innerHTML = delivHtml;
+
+  document.getElementById('onboarding-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOnboarding(e) {
+  if (e && e.target !== document.getElementById('onboarding-overlay')) return;
+  document.getElementById('onboarding-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+/* ══ EMAIL CAPTURE → BREVO API ══ */
+async function sendEmailToBrevo(email) {
+  try {
+    const response = await fetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    return response.ok;
+  } catch(e) {
+    return false;
+  }
+}
+
+const _origSubmitEmail = typeof submitEmail !== 'undefined' ? submitEmail : null;
+function submitEmail() {
+  const inp = document.getElementById('gate-email');
+  const email = inp ? inp.value.trim() : '';
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(email)) {
+    if (inp) { inp.style.borderColor = '#e87f24'; inp.focus(); }
+    return;
+  }
+  try { localStorage.setItem('daska_email', email); } catch(e) {}
+  sendEmailToBrevo(email);
+  showScore(window._pendingScore, window._pendingDiag, email);
 }
 </script>
 </body>

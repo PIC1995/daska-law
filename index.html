@@ -1584,7 +1584,7 @@ function submitEmail() {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(!re.test(email)) { if(inp) { inp.style.borderColor='#e87f24'; inp.focus(); } return; }
   try { localStorage.setItem('daska_email', email); } catch(e) {}
-  fetch('/.netlify/functions/submit-email', {
+  fetch('/.netlify/functions/subscribe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email })

@@ -475,10 +475,10 @@ a { text-decoration: none; color: inherit; }
   </div>
 
   <div class="sidebar-user">
-    <div class="user-av">TH</div>
+    <div class="user-av">👤</div>
     <div>
-      <div class="user-name">Thomas Hébert</div>
-      <div class="user-level"><span class="level-dot"></span> Niveau Builder · 420 XP</div>
+      <div class="user-name">Bienvenue</div>
+      <div class="user-level"><span class="level-dot"></span> Commencez votre premier diagnostic</div>
     </div>
   </div>
 
@@ -519,13 +519,13 @@ a { text-decoration: none; color: inherit; }
         <span></span><span></span><span></span>
       </button>
       <div>
-        <div class="topbar-greeting">Bonjour Thomas 👋</div>
+        <div class="topbar-greeting">Bienvenue sur Daska 👋</div>
         <div class="topbar-date" id="current-date">—</div>
       </div>
     </div>
     <div class="topbar-right">
       <div class="topbar-notif">🔔<div class="notif-dot"></div></div>
-      <div class="topbar-av">TH</div>
+      <div class="topbar-av" style="font-size:1.1rem;">👤</div>
     </div>
   </div>
 
@@ -533,41 +533,19 @@ a { text-decoration: none; color: inherit; }
   <div class="page">
 
     <!-- INDICE HERO -->
-    <div class="indice-hero fade-in">
-      <svg width="0" height="0">
-        <defs>
-          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#1600FF"/>
-            <stop offset="100%" style="stop-color:#FF3D00"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <div class="indice-ring">
-        <svg viewBox="0 0 110 110">
-          <circle class="ring-bg2" cx="55" cy="55" r="50"/>
-          <circle class="ring-fg2" cx="55" cy="55" r="50"/>
-        </svg>
-        <div class="ring-center">
-          <div class="ring-num">68</div>
-          <div class="ring-den">/100</div>
-        </div>
-      </div>
-
+    <div class="indice-hero fade-in" style="grid-template-columns:1fr;text-align:center;padding:40px 32px;">
       <div class="indice-info">
-        <div class="indice-label">Ton Indice Daska</div>
-        <div class="indice-name">Builder 🏗️</div>
-        <div class="indice-desc">Tu construis les fondations de ton capital. Il te reste 32 points pour atteindre le niveau Scaler. Continue comme ça !</div>
-        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-          <span class="chip chip-green">↑ +12 ce mois</span>
-          <span class="chip chip-orange">2 diagnostics restants</span>
-          <span class="chip chip-blue">420 XP accumulés</span>
+        <div class="indice-label" style="justify-content:center;display:flex;">Votre tableau de bord</div>
+        <div class="indice-name" style="font-size:1.4rem;">Commencez votre premier diagnostic 🚀</div>
+        <div class="indice-desc" style="max-width:500px;margin:0 auto;">Obtenez votre Indice Daska personnalisé en 5 minutes. Votre score, vos recommandations et votre plan d'action seront affichés ici.</div>
+        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;justify-content:center;">
+          <a href="/#diagnostics" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1600FF;padding:12px 28px;border-radius:100px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;font-size:.9rem;text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            Lancer mon diagnostic →
+          </a>
+          <a href="https://calendly.com/pcallede-constellation" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;padding:12px 28px;border-radius:100px;font-weight:600;font-size:.9rem;text-decoration:none;border:1px solid rgba(255,255,255,.2);transition:opacity .2s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+            Parler à un avocat
+          </a>
         </div>
-      </div>
-
-      <div class="indice-stats">
-        <div class="istat"><div class="istat-val">3/5</div><div class="istat-lab">Diagnostics faits</div></div>
-        <div class="istat"><div class="istat-val">8</div><div class="istat-lab">Semaines actives</div></div>
-        <div class="istat"><div class="istat-val">3</div><div class="istat-lab">Badges obtenus</div></div>
       </div>
     </div>
 

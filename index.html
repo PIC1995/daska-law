@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- Stripe.js — chargé sur toutes les pages pour la détection de fraude -->
+<script src="https://js.stripe.com/v3/"></script>
 <style>
 
 /* ════════════════════════════════
@@ -1223,6 +1225,9 @@ footer {
           <strong style="color:var(--c-ink);">Pour qui :</strong> SAS ou SARL, jusqu'à 10 associés. Post-création, avant levée de fonds, ou après une cession de titres non formalisée.
         </div>
 
+        <button class="btn btn-md offre-cta-v2" onclick="startCheckout(this)" style="margin-bottom:10px;background:var(--c-green);color:#fff;box-shadow:0 4px 20px rgba(0,200,122,.3);">
+          Commander — Payer 999 € HT →
+        </button>
         <a href="Daska- Offre Clean Capital.docx" download class="btn btn-outline btn-md offre-cta-v2" style="margin-bottom:10px;text-decoration:none;display:inline-block;">
           Voir le process étape par étape →
         </a>
@@ -1351,7 +1356,7 @@ footer {
     <div id="onb-deliverable" style="margin:0 32px 28px;padding:20px;border-radius:12px;"></div>
 
     <!-- CTA -->
-    <div style="padding:0 32px 32px;display:flex;gap:12px;flex-wrap:wrap;">
+    <div id="onb-cta-area" style="padding:0 32px 32px;display:flex;gap:12px;flex-wrap:wrap;">
       <a id="onb-cta" href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="flex:1;justify-content:center;text-decoration:none;">
         Démarrer — Réserver mon appel →
       </a>
@@ -1689,6 +1694,29 @@ function openOnboarding(type) {
     </div>`;
   document.getElementById('onb-deliverable').innerHTML = delivHtml;
 
+  // CTA dynamique : paiement pour clean, Calendly pour les autres
+  const ctaArea = document.getElementById('onb-cta-area');
+  if (ctaArea) {
+    if (type === 'clean') {
+      ctaArea.innerHTML = `
+        <button class="btn btn-lg" onclick="startCheckout(this)" style="flex:1;justify-content:center;background:var(--c-green);color:#fff;box-shadow:0 4px 20px rgba(0,200,122,.3);font-family:var(--ff-display);">
+          Commander — Payer 999 € HT →
+        </button>
+        <a href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-ghost-w btn-sm" style="flex-shrink:0;align-self:center;">
+          Appel de cadrage
+        </a>
+        <button onclick="closeOnboarding()" class="btn btn-ghost-w btn-lg" style="flex:0;white-space:nowrap;">Fermer</button>
+      `;
+    } else {
+      ctaArea.innerHTML = `
+        <a id="onb-cta" href="https://calendly.com/pcallede-constellation" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="flex:1;justify-content:center;text-decoration:none;">
+          Démarrer — Réserver mon appel →
+        </a>
+        <button onclick="closeOnboarding()" class="btn btn-ghost-w btn-lg" style="flex:0;white-space:nowrap;">Fermer</button>
+      `;
+    }
+  }
+
   document.getElementById('onboarding-overlay').style.display = 'block';
   document.body.style.overflow = 'hidden';
 }
@@ -1698,6 +1726,57 @@ function closeOnboarding(e) {
   document.getElementById('onboarding-overlay').style.display = 'none';
   document.body.style.overflow = '';
 }
+
+/* ══ STRIPE CHECKOUT ══ */
+// pk_live est conçu pour être public (client-side only — la sk_live reste dans les env vars Netlify)
+const stripe = Stripe('pk_live_51TNBb8EmwKQBmvxP1my9Q00lzGOiKithovCvlMHVsoPKuSHTjDPYuNMrLblco1N9IV0InM2BmLSTBqLPROUHPesd00QedT5kud');
+
+async function startCheckout(btn) {
+  const orig = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Redirection…';
+  try {
+    const res = await fetch('/.netlify/functions/create-checkout', { method: 'POST' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.url) {
+      // Approche moderne recommandée par Stripe (redirectToCheckout est déprécié)
+      window.location.href = data.url;
+      return;
+    }
+    throw new Error(data.error || 'no url');
+  } catch (err) {
+    console.error('Stripe checkout error:', err);
+    btn.disabled = false;
+    btn.innerHTML = orig;
+    const msg = document.createElement('p');
+    msg.style.cssText = 'color:var(--c-orange);font-size:.8rem;margin-top:8px;text-align:center;';
+    msg.textContent = 'Une erreur est survenue. Contactez-nous : contact@daska.law';
+    btn.insertAdjacentElement('afterend', msg);
+    setTimeout(() => msg.remove(), 6000);
+  }
+}
+
+/* Bannière résultat paiement */
+(function() {
+  const status = new URLSearchParams(location.search).get('payment');
+  if (!status) return;
+  history.replaceState(null, '', location.pathname);
+  const ok = status === 'success';
+  const el = document.createElement('div');
+  el.setAttribute('role', 'alert');
+  el.style.cssText = [
+    'position:fixed;top:var(--nav-h);left:0;right:0;z-index:1000;',
+    'padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;',
+    'font-weight:600;font-size:.9rem;box-shadow:0 4px 16px rgba(0,0,0,.18);',
+    ok ? 'background:var(--c-green);color:#fff;' : 'background:var(--c-orange);color:#fff;'
+  ].join('');
+  el.innerHTML = ok
+    ? '✅ Paiement confirmé — Nous vous contactons sous 24h pour démarrer votre mission Clean Capital. <button onclick="this.closest(\'[role]\').remove()" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;padding:0 6px;line-height:1;">✕</button>'
+    : '❌ Paiement annulé. Vous pouvez commander à nouveau quand vous le souhaitez. <button onclick="this.closest(\'[role]\').remove()" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;padding:0 6px;line-height:1;">✕</button>';
+  document.body.insertBefore(el, document.body.firstChild);
+  if (ok) setTimeout(() => el.remove(), 9000);
+})();
 
 /* ══ EMAIL CAPTURE → BREVO API ══ */
 async function sendEmailToBrevo(email) {
